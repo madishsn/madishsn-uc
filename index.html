@@ -7,6 +7,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Profile</title>
 
@@ -25,26 +28,170 @@
 			background-color: whitesmoke;
 			text-align: justify;
 			color: #005f73;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 		}
 
 		h3{
 			color: #2a9d8f;
 		}
 		.footer{
-			background-color: black;
-			color: whitesmoke;
+			background-color: white;
+			color: 2a9d8f;
+		}
+		.dogImage, #flagCounter, .jokeResponse{
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			width: 250px;
 		}
 
+		/*#jokeResponse{
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			height: auto;
+
+		}*/
+		.responses{
+		 display: flex;
+		 flex-direction: row;
+		}
+		#scrollTop{
+			position: sticky;
+			float: right;
+			bottom: 0;
+			right: 0;
+		}
 		
 		
 
 	</style>
+
+	<script>
+			// function setCookie(cname, cvalue, exdays) {
+  			// const d = new Date();
+  			// d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  			// let expires = "expires="+ d.toUTCString();
+  			// document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+
+			// }
+
+			// function getCookie(cname) {
+  			// 	let name = cname + "=";
+  			// 	let decodedCookie = decodeURIComponent(document.cookie);
+  			// 	let ca = decodedCookie.split(';');
+  			// 	for(let i = 0; i <ca.length; i++) {
+    		// 		let c = ca[i];
+    		// 		while (c.charAt(0) == ' ') {
+      		// 		c = c.substring(1);
+    		// 		}
+    		// 		if (c.indexOf(name) == 0) {
+      		// 			return c.substring(name.length, c.length);
+    		// 		}
+  			// 	}
+  			// 	return "";
+			// }
+
+			// function checkCookie() {
+  			// 	let user = getCookie("username");
+  			// 	if (user != "") {
+    		// 		alert("Welcome again " + user);
+  			// 	} else {
+    		// 		user = prompt("Please enter your name:","");
+     		// 		if (user != "" && user != null) {
+       		// 			setCookie("username", user, 30);
+     		// 		}
+  			// 	}
+			// }
+
+
+			function setCookie(name, value, days) {
+
+      var expires = "";
+
+      if (days) {
+
+        var date = new Date();
+
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+
+        expires = "; expires=" + date.toUTCString();
+
+      }
+
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+
+    }
+
+
+
+    // Function to get a cookie
+
+    function getCookie(name) {
+
+      var nameEQ = name + "=";
+
+      var ca = document.cookie.split(';');
+
+      for (var i = 0; i < ca.length; i++) {
+
+        var c = ca[i];
+
+        while (c.charAt(0) == ' ') {
+
+          c = c.substring(1, c.length);
+
+        }
+
+        if (c.indexOf(nameEQ) == 0) {
+
+          return c.substring(nameEQ.length, c.length);
+
+        }
+
+      }
+
+      return null;
+
+    }
+
+
+
+    // Function to check if the client has visited before
+
+    function checkFirstVisit() {
+
+      var lastVisit = getCookie("lastVisit");
+
+      if (lastVisit) {
+
+        // Display welcome back message
+
+        document.getElementById("welcomeMessage").innerHTML = "Welcome back! Your last visit was " + lastVisit;
+
+      } else {
+
+        // Set cookie for first visit
+
+        setCookie("lastVisit", new Date().toLocaleString(), 365);
+
+        // Display welcome message
+
+        document.getElementById("welcomeMessage").innerHTML = "Welcome to my homepage!";
+
+      }
+
+    }
+
+
+
+    // Call the checkFirstVisit function when the page loads
+
+    window.onload = checkFirstVisit;
+		</script>
 </head>
-<body>
+<body >
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-
+<p id="welcomeMessage"></p>
 	<div class="container-fluid header">
 		<div class="image mx-5 my-3 col-2">
 			<img src="images/Krishna.jpg" class="rounded-circle" alt="Krishna Headshot" width="200" height="200">
@@ -62,13 +209,70 @@
 			<i class="fa fa-address-book py-2" style="color: #0fa5d7; font-size: 20px;"></i> &nbsp;Cincinnati,  Ohio,  45220.
 
 				
-		<div id="email" onclick="showhideEmail()"> <i class="fa fa-envelope" style="color:skyblue; font-size: 20px;"></i> Show my email</div>
+		<div id="email"  onclick="showhideEmail()"> <i class="fa fa-envelope" style="color:skyblue; font-size: 20px;"></i> Show my email</div>
+
+		<!-- <div id="email"  ng-if="shown" ng-click="showhideEmail()"> <i class="fa fa-envelope" style="color:skyblue; font-size: 20px;"></i> Show my email {{email}}</div>
+		<script>
+			function showhideEmail(){
+				console.log("email")
+			var shown = true;
+			var email ="madishsn@mail.uc.edu";
+			}
+			
+
+		</script> -->
+		<p id="welcomemsg"></p>
+		
+
 		<script type="text/javascript" src="email.js"></script>
 		</p>
 
-			
+			<!-- <script>
+				function setcookie(name, value,days){
+					var expires = "";
+					if(days){
+						var date = new Date();
+						date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+						expires = "; expires=" + date.toUTCString();
+					}
+					document.cookie = name + "=" + (value || "") + expires + "; path=/";
+				}
+
+				function getcookie(name){
+					var nameEQ = name + "=";
+					var ca =document.cookie.split(';');
+					for(var i=0;i<ca.length;i++){
+						var c = ca[i];
+						while(c.charAt(0)==' '){
+							c = c.substring(1,c.length);
+						}
+						if(c.indexOf(nameEQ)==0){
+							return c.substring(nameEQ.length, c.length);
+
+						}
+					}
+					return null;
+				}
+
+				function checkFirst(){
+					var lastvisit = getcookie("lastvisit");
+					if(lastvisit){
+						document.getElementById("welcomemsg").innerHTML = "welcome back " + lastvisit;
+					}
+					else{
+						setcookie("lastvisit", new Date().toLocaleString(), 365);
+
+						document.getElementById("welcomemsg").innerHTML = "Welcome homepage"
+					}
+				}
+
+				window.onload = checkFirst;
+			</script> -->
 
 		</div>
+
+
+
 		<canvas id="analog-clock" width="150" height="150" ></canvas>
 		<script src="https://waph-uc.github.io/clock.js"></script>
 		<script>
@@ -90,6 +294,7 @@
 		
 	</div>
 <br> <br>
+
 
 	<div class="container">
 		<div class="col-12 card p-2" style="color:#005f73 ;">
@@ -135,6 +340,8 @@
 	
 <br>
 
+
+
 <div class="container">
 	<div class="col-12 container card p-2">
 			<p><h3>Professional Experience</h3><br>
@@ -148,19 +355,7 @@
 					<li>Design and develop applications from front end-to-end using NodeJS, Angular, MongoDB and ExpressJS Framework.</li>
 					<li>Develop highly interactive web application utilizing Javascript, HTML5, CSS, JSON, Angular and integrating Restful API's external web services ensuring high performance on Mobile and Desktop.</li>
 				</ul>
-
-
-
-			</p>
-			<br>
-		</div>
-
-	</div>
-		<br>
-
-	<div class="container">
-		<div class="col-12 container card p-2">
-			<p><h3>Professional Experience</h3><br>
+<br><br>
 
 				<b>Cognizant Technology Solutions, India | March 2021 - October 2021 | Full Stack Developer Intern</b> <br> <br>
 
@@ -177,10 +372,10 @@
 			</p>
 			<br>
 		</div>
-		<br>
-</div>
 
-<br>
+	</div>
+		<br>
+
 <div class="container">
 	<div class="col-7 card p-2">
 		<h3>Academic Projects</h3> <br>
@@ -279,23 +474,46 @@
 		displayDogImage();
 		setInterval(displayDogImage,60000);
 
+		
+
 		</script>
 
-		<div id="jokeResponse"></div> 
-		<div >
-			<img src="" id="dogResponse" alt="Dog Image" height="250" width="250">
-		</div>
+<div class="container-fluid responses">
+	<div id="jokeResponse" class="p-3 col-4">{{joke}}</div> 
+	<div class="dogImage col-3 mx-5">
+			<img src="" id="dogResponse" alt="Dog Image" height="250" width="250" >
+			<div class="container"> 
+				<p> Dog Image</p> 
+			</div>
 
-		
-		
 			
+	</div>
 
+		<div class="flagCounter col-3">
+			<a href="https://info.flagcounter.com/3GFF"><img src="https://s11.flagcounter.com/count2/3GFF/bg_FFFFFF/txt_000000/border_9E9E9E/columns_3/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" id="flagCounter" border="0"></a>
 			
-
 		</div>
+	</div>
+		
 </div>
-	
+</div>
 
+
+	
+<div id="scrollTop" ng-controller="scrollController" class="m-1">
+		<!-- <p>My first expression: {{ currentdate }}</p> -->
+	<button onclick="scrollToTop()" type="button" class="btn btn-success"> <i class="fa fa-angle-up"></i></button>
+	<script>
+		
+
+		function scrollToTop(){
+			console.log("sample")
+			window.scrollTo({top:0, behavior:'smooth'});
+
+		 }
+	</script>
+		
+</div>
 </body>
 </html>
  
