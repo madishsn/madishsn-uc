@@ -65,129 +65,129 @@
 	</style>
 
 	<script>
-			// function setCookie(cname, cvalue, exdays) {
-  			// const d = new Date();
-  			// d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  			// let expires = "expires="+ d.toUTCString();
-  			// document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+			function setCookie(cname, cvalue, exdays) {
+  			const d = new Date();
+  			d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  			let expires = "expires="+ d.toUTCString();
+  			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 
-			// }
+			}
 
-			// function getCookie(cname) {
-  			// 	let name = cname + "=";
-  			// 	let decodedCookie = decodeURIComponent(document.cookie);
-  			// 	let ca = decodedCookie.split(';');
-  			// 	for(let i = 0; i <ca.length; i++) {
-    		// 		let c = ca[i];
-    		// 		while (c.charAt(0) == ' ') {
-      		// 		c = c.substring(1);
-    		// 		}
-    		// 		if (c.indexOf(name) == 0) {
-      		// 			return c.substring(name.length, c.length);
-    		// 		}
-  			// 	}
-  			// 	return "";
-			// }
+			function getCookie(cname) {
+  				let name = cname + "=";
+  				let decodedCookie = decodeURIComponent(document.cookie);
+  				let ca = decodedCookie.split(';');
+  				for(let i = 0; i <ca.length; i++) {
+    				let c = ca[i];
+    				while (c.charAt(0) == ' ') {
+      				c = c.substring(1);
+    				}
+    				if (c.indexOf(name) == 0) {
+      					return c.substring(name.length, c.length);
+    				}
+  				}
+  				return "";
+			}
 
-			// function checkCookie() {
-  			// 	let user = getCookie("username");
-  			// 	if (user != "") {
-    		// 		alert("Welcome again " + user);
-  			// 	} else {
-    		// 		user = prompt("Please enter your name:","");
-     		// 		if (user != "" && user != null) {
-       		// 			setCookie("username", user, 30);
-     		// 		}
-  			// 	}
-			// }
-
-
-			function setCookie(name, value, days) {
-
-      var expires = "";
-
-      if (days) {
-
-        var date = new Date();
-
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-
-        expires = "; expires=" + date.toUTCString();
-
-      }
-
-      document.cookie = name + "=" + (value || "") + expires + "; path=/";
-
-    }
+			function checkCookie() {
+  				let user = getCookie("username");
+  				if (user != "") {
+    				alert("Welcome again " + user);
+  				} else {
+    				user = prompt("Please enter your name:","");
+     				if (user != "" && user != null) {
+       					setCookie("username", user, 30);
+     				}
+  				}
+			}
 
 
+	// 		function setCookie(name, value, days) {
 
-    // Function to get a cookie
+    //   var expires = "";
 
-    function getCookie(name) {
+    //   if (days) {
 
-      var nameEQ = name + "=";
+    //     var date = new Date();
 
-      var ca = document.cookie.split(';');
+    //     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 
-      for (var i = 0; i < ca.length; i++) {
+    //     expires = "; expires=" + date.toUTCString();
 
-        var c = ca[i];
+    //   }
 
-        while (c.charAt(0) == ' ') {
+    //   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 
-          c = c.substring(1, c.length);
-
-        }
-
-        if (c.indexOf(nameEQ) == 0) {
-
-          return c.substring(nameEQ.length, c.length);
-
-        }
-
-      }
-
-      return null;
-
-    }
+    // }
 
 
 
-    // Function to check if the client has visited before
+    // // Function to get a cookie
 
-    function checkFirstVisit() {
+    // function getCookie(name) {
 
-      var lastVisit = getCookie("lastVisit");
+    //   var nameEQ = name + "=";
 
-      if (lastVisit) {
+    //   var ca = document.cookie.split(';');
 
-        // Display welcome back message
+    //   for (var i = 0; i < ca.length; i++) {
 
-        document.getElementById("welcomeMessage").innerHTML = "Welcome back! Your last visit was " + lastVisit;
+    //     var c = ca[i];
 
-      } else {
+    //     while (c.charAt(0) == ' ') {
 
-        // Set cookie for first visit
+    //       c = c.substring(1, c.length);
 
-        setCookie("lastVisit", new Date().toLocaleString(), 365);
+    //     }
 
-        // Display welcome message
+    //     if (c.indexOf(nameEQ) == 0) {
 
-        document.getElementById("welcomeMessage").innerHTML = "Welcome to my homepage!";
+    //       return c.substring(nameEQ.length, c.length);
 
-      }
+    //     }
 
-    }
+    //   }
+
+    //   return null;
+
+    // }
+
+
+
+    // // Function to check if the client has visited before
+
+    // function checkFirstVisit() {
+
+    //   var lastVisit = getCookie("lastVisit");
+
+    //   if (lastVisit) {
+
+    //     // Display welcome back message
+
+    //     document.getElementById("welcomeMessage").innerHTML = "Welcome back! Your last visit was " + lastVisit;
+
+    //   } else {
+
+    //     // Set cookie for first visit
+
+    //     setCookie("lastVisit", new Date().toLocaleString(), 365);
+
+    //     // Display welcome message
+
+    //     document.getElementById("welcomeMessage").innerHTML = "Welcome to my homepage!";
+
+    //   }
+
+    // }
 
 
 
     // Call the checkFirstVisit function when the page loads
 
-    window.onload = checkFirstVisit;
+    // window.onload = checkFirstVisit;
 		</script>
 </head>
-<body >
+<body onload="checkCookie()">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
