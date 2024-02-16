@@ -65,133 +65,57 @@
 	</style>
 
 	<script>
-			function setCookie(cname, cvalue, exdays) {
-  			const d = new Date();
-  			d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  			let expires = "expires="+ d.toUTCString();
-  			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 
+		function setCookie(name, value, days) {
+			var expires = "";
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+				expires = "; expires=" + date.toUTCString();
+			}
+			document.cookie = name + "=" + (value || "") + expires + "; path=/";
+		}
+
+
+    	function getCookie(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+				c = c.substring(1, c.length);
+				}
+				if (c.indexOf(nameEQ) == 0) {
+				return c.substring(nameEQ.length, c.length);
+				}
+
+      		}
+
+      		return null;
+
+    	}
+
+
+    	function checkFirstVisit() {
+			var lastVisit = getCookie("lastVisit");
+			
+			if (lastVisit) {
+				document.getElementById("welcomeMessage").innerHTML = " <h5>Welcome back! <br>Last visit: " + lastVisit + "</h5>";
+			} else {
+				setCookie("lastVisit", new Date().toLocaleString(), 30);
+				document.getElementById("welcomeMessage").innerHTML =  "<h5>Welcome to my Profile page</h5>";
 			}
 
-			function getCookie(cname) {
-  				let name = cname + "=";
-  				let decodedCookie = decodeURIComponent(document.cookie);
-  				let ca = decodedCookie.split(';');
-  				for(let i = 0; i <ca.length; i++) {
-    				let c = ca[i];
-    				while (c.charAt(0) == ' ') {
-      				c = c.substring(1);
-    				}
-    				if (c.indexOf(name) == 0) {
-      					return c.substring(name.length, c.length);
-    				}
-  				}
-  				return "";
-			}
+    	}
 
-			function checkCookie() {
-  				let user = getCookie("username");
-  				if (user != "") {
-    				alert("Welcome again " + user);
-  				} else {
-    				user = prompt("Please enter your name:","");
-     				if (user != "" && user != null) {
-       					setCookie("username", user, 30);
-     				}
-  				}
-			}
-
-
-	// 		function setCookie(name, value, days) {
-
-    //   var expires = "";
-
-    //   if (days) {
-
-    //     var date = new Date();
-
-    //     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-
-    //     expires = "; expires=" + date.toUTCString();
-
-    //   }
-
-    //   document.cookie = name + "=" + (value || "") + expires + "; path=/";
-
-    // }
-
-
-
-    // // Function to get a cookie
-
-    // function getCookie(name) {
-
-    //   var nameEQ = name + "=";
-
-    //   var ca = document.cookie.split(';');
-
-    //   for (var i = 0; i < ca.length; i++) {
-
-    //     var c = ca[i];
-
-    //     while (c.charAt(0) == ' ') {
-
-    //       c = c.substring(1, c.length);
-
-    //     }
-
-    //     if (c.indexOf(nameEQ) == 0) {
-
-    //       return c.substring(nameEQ.length, c.length);
-
-    //     }
-
-    //   }
-
-    //   return null;
-
-    // }
-
-
-
-    // // Function to check if the client has visited before
-
-    // function checkFirstVisit() {
-
-    //   var lastVisit = getCookie("lastVisit");
-
-    //   if (lastVisit) {
-
-    //     // Display welcome back message
-
-    //     document.getElementById("welcomeMessage").innerHTML = "Welcome back! Your last visit was " + lastVisit;
-
-    //   } else {
-
-    //     // Set cookie for first visit
-
-    //     setCookie("lastVisit", new Date().toLocaleString(), 365);
-
-    //     // Display welcome message
-
-    //     document.getElementById("welcomeMessage").innerHTML = "Welcome to my homepage!";
-
-    //   }
-
-    // }
-
-
-
-    // Call the checkFirstVisit function when the page loads
-
-    // window.onload = checkFirstVisit;
-		</script>
+    window.onload = checkFirstVisit;
+</script>
 </head>
-<body onload="checkCookie()">
+<body >
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-<p id="welcomeMessage"></p>
+
 	<div class="container-fluid header">
 		<div class="image mx-5 my-3 col-2">
 			<img src="images/Krishna.jpg" class="rounded-circle" alt="Krishna Headshot" width="200" height="200">
@@ -209,71 +133,19 @@
 			<i class="fa fa-address-book py-2" style="color: #0fa5d7; font-size: 20px;"></i> &nbsp;Cincinnati,  Ohio,  45220.
 
 				
-		<div id="email"  onclick="showhideEmail()"> <i class="fa fa-envelope" style="color:skyblue; font-size: 20px;"></i> Show my email</div>
+			<div id="email"  onclick="showhideEmail()"> <i class="fa fa-envelope" style="color:skyblue; font-size: 20px;"></i> Show my email</div>
 
-		<!-- <div id="email"  ng-if="shown" ng-click="showhideEmail()"> <i class="fa fa-envelope" style="color:skyblue; font-size: 20px;"></i> Show my email {{email}}</div>
-		<script>
-			function showhideEmail(){
-				console.log("email")
-			var shown = true;
-			var email ="madishsn@mail.uc.edu";
-			}
-			
-
-		</script> -->
-		<p id="welcomemsg"></p>
-		
-
-		<script type="text/javascript" src="email.js"></script>
-		</p>
-
-			<!-- <script>
-				function setcookie(name, value,days){
-					var expires = "";
-					if(days){
-						var date = new Date();
-						date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-						expires = "; expires=" + date.toUTCString();
-					}
-					document.cookie = name + "=" + (value || "") + expires + "; path=/";
-				}
-
-				function getcookie(name){
-					var nameEQ = name + "=";
-					var ca =document.cookie.split(';');
-					for(var i=0;i<ca.length;i++){
-						var c = ca[i];
-						while(c.charAt(0)==' '){
-							c = c.substring(1,c.length);
-						}
-						if(c.indexOf(nameEQ)==0){
-							return c.substring(nameEQ.length, c.length);
-
-						}
-					}
-					return null;
-				}
-
-				function checkFirst(){
-					var lastvisit = getcookie("lastvisit");
-					if(lastvisit){
-						document.getElementById("welcomemsg").innerHTML = "welcome back " + lastvisit;
-					}
-					else{
-						setcookie("lastvisit", new Date().toLocaleString(), 365);
-
-						document.getElementById("welcomemsg").innerHTML = "Welcome homepage"
-					}
-				}
-
-				window.onload = checkFirst;
-			</script> -->
+			<script type="text/javascript" src="email.js"></script>
+			</p>
 
 		</div>
 
 
-
-		<canvas id="analog-clock" width="150" height="150" ></canvas>
+		<div>
+			<canvas class="mx-5" id="analog-clock" width="150" height="150" ></canvas> <br>
+			<p id="welcomeMessage" ></p>
+		</div>
+		
 		<script src="https://waph-uc.github.io/clock.js"></script>
 		<script>
 
