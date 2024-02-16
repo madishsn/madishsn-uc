@@ -326,11 +326,14 @@
 	<h6 id="digit-clock" style="text-align: center;" ></h6>
 	<a href="./waph.html" target="_blank" style="text-align: center;"> <h5>Web Application Programming and Hacking Course Details</h5> </a>
 	
-	<button onclick="scrollToTop()" id="scrollTop" type="button" class="btn btn-info"> <i class="fa fa-angle-up"></i></button>
+	
+	<div ng-app='myApp' id="scrollTop" ng-controller="scrollController" class="m-1">
+	<button ng-click="scrollToTop()" id="scrollTop" type="button" class="btn btn-info"> <i class="fa fa-angle-up"></i></button>
+
+	</div>
+
 	<br>
 	<br>
-	<!-- <div id="scrollTop" ng-controller="scrollController" class="m-1"> -->
-	<!-- </div> -->
 
 </div>
 
@@ -339,12 +342,13 @@
 
 		
 		<script>
-
-			function scrollToTop(){
-			console.log("sample")
+			angular.module('myApp', []).controller('scrollController', function($scope,$window){
+				$scope.scrollToTop = function(){
+					console.log("sample")
 			window.scrollTo({top:0, behavior:'smooth'});
-
-		 }
+				}
+			})
+		
 		function displayTime(){
 			date = new Date()
 				document.getElementById('digit-clock').innerHTML = "Current time:" + date.toUTCString();
