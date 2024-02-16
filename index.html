@@ -100,7 +100,7 @@
 			var lastVisit = getCookie("lastVisit");
 			
 			if (lastVisit) {
-				document.getElementById("welcomeMessage").innerHTML = " <h5>Welcome back! <br>Last visit: " + lastVisit + "</h5>";
+				document.getElementById("welcomeMessage").innerHTML = "<br> <h5 style=" + "color:#b82601" + ">Welcome back! <br>Last visit: " + lastVisit + "</h5>";
 			} else {
 				setCookie("lastVisit", new Date().toLocaleString(), 30);
 				document.getElementById("welcomeMessage").innerHTML =  "<br><h5 style=" + "color:#b82601" + ">Welcome to my Profile page</h5>";
