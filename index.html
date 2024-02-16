@@ -32,32 +32,32 @@
 
 		}
 
+		.randomdiv{
+			display: inline-block;
+		}
+
 		h3{
 			color: #2a9d8f;
 		}
-		.footer{
-			background-color: white;
-			color: 2a9d8f;
-		}
-		.dogImage, #flagCounter, .jokeResponse{
+		
+		.dogImage{
 			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			width: 250px;
 		}
 
-		/*#jokeResponse{
-			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			height: auto;
-
-		}*/
+		
 		.responses{
-		 display: flex;
-		 flex-direction: row;
+		 
+		 text-align: center;
 		}
 		#scrollTop{
 			position: sticky;
 			float: right;
 			bottom: 0;
 			right: 0;
+		}
+		.random{
+			background-color: #e9b000;
 		}
 		
 		
@@ -103,7 +103,7 @@
 				document.getElementById("welcomeMessage").innerHTML = " <h5>Welcome back! <br>Last visit: " + lastVisit + "</h5>";
 			} else {
 				setCookie("lastVisit", new Date().toLocaleString(), 30);
-				document.getElementById("welcomeMessage").innerHTML =  "<h5>Welcome to my Profile page</h5>";
+				document.getElementById("welcomeMessage").innerHTML =  "<br><h5 style=" + "color:#b82601" + ">Welcome to my Profile page</h5>";
 			}
 
     	}
@@ -282,15 +282,72 @@
 	</div>
 </div>
 
+
 <br>
 <br>
 
-<div class="container-fluid footer">
+<div class="random container-fluid">
+	<h1 style="text-align:center;">Thanks for visiting</h1> <br><br>
+
+	<h2 style="text-align:center;">Some Random Jokes and Images</h2> <br>
+
+	<div class="container randomdiv col-6" style="text-align:center; top: 0;">
+		<div  class=" " > 
+			<h3 class="p-3">Joke of the day</h3> 
 		
-		<div id="digit-clock"></div>
+			<p id="jokeResponse" class="p-3"></p> 
+			<br><br><br>
+		
+		
+		</div>
+	</div>
+
+		<div class="dogImage randomdiv col-3 mx-5" style="background-color: white;">
+			<img src="" id="dogResponse" alt="Dog Image" height="250" width="250" >
+			<div class="container"> 
+				<h6 style="text-align: center;" class="pt-1"> Dog Image</h6> 
+			</div>
+
+			
+		</div>
+		<br><br>
+
+	<div class="container responses">
+	
+
+		<div class="">
+			<a href="https://info.flagcounter.com/3GFF"><img src="https://s11.flagcounter.com/count2/3GFF/bg_FFFFFF/txt_000000/border_9E9E9E/columns_3/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" id="flagCounter" border="0"></a>
+			
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<h6 id="digit-clock" style="text-align: center;" ></h6>
+	<a href="./waph.html" target="_blank" style="text-align: center;"> <h5>Web Application Programming and Hacking Course Details</h5> </a>
+	
+	<button onclick="scrollToTop()" id="scrollTop" type="button" class="btn btn-info"> <i class="fa fa-angle-up"></i></button>
+	<br>
+	<br>
+	<!-- <div id="scrollTop" ng-controller="scrollController" class="m-1"> -->
+	<!-- </div> -->
+
+</div>
+
+
+
+
+		
 		<script>
+
+			function scrollToTop(){
+			console.log("sample")
+			window.scrollTo({top:0, behavior:'smooth'});
+
+		 }
 		function displayTime(){
-				document.getElementById('digit-clock').innerHTML = "Current time:" + new Date();
+			date = new Date()
+				document.getElementById('digit-clock').innerHTML = "Current time:" + date.toUTCString();
 		}
 		setInterval(displayTime, 500);
 
@@ -303,11 +360,11 @@
 				if(result){
 					if(result.type === "single"){
 						console.log("from jokeAPI: " + JSON.stringify(result));
-						$("#jokeResponse").html("A " + result.category + " joke of the day: " + "<br>" + result.joke)
+						$("#jokeResponse").html("A " + result.category + " joke of the day " + "<br>" + result.joke)
 					}
 					else{
 						console.log("from jokeAPI: " + JSON.stringify(result));
-						$("#jokeResponse").html("A " + result.category + " joke of the day: " + "<br>" + result.setup + "<br>" + result.delivery)
+						$("#jokeResponse").html("A " + result.category + " joke of the day " + "<br>" + result.setup + "<br>" + result.delivery)
 					}
 				}
 
@@ -350,42 +407,15 @@
 
 		</script>
 
-<div class="container-fluid responses">
-	<div id="jokeResponse" class="p-3 col-4">{{joke}}</div> 
-	<div class="dogImage col-3 mx-5">
-			<img src="" id="dogResponse" alt="Dog Image" height="250" width="250" >
-			<div class="container"> 
-				<p> Dog Image</p> 
-			</div>
 
-			
-	</div>
-
-		<div class="flagCounter col-3">
-			<a href="https://info.flagcounter.com/3GFF"><img src="https://s11.flagcounter.com/count2/3GFF/bg_FFFFFF/txt_000000/border_9E9E9E/columns_3/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" id="flagCounter" border="0"></a>
-			
-		</div>
-	</div>
 		
-</div>
+
 </div>
 
 
 	
-<div id="scrollTop" ng-controller="scrollController" class="m-1">
-		<!-- <p>My first expression: {{ currentdate }}</p> -->
-	<button onclick="scrollToTop()" type="button" class="btn btn-success"> <i class="fa fa-angle-up"></i></button>
-	<script>
-		
 
-		function scrollToTop(){
-			console.log("sample")
-			window.scrollTo({top:0, behavior:'smooth'});
 
-		 }
-	</script>
-		
-</div>
 </body>
 </html>
  
